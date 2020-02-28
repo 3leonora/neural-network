@@ -1,2 +1,2 @@
 # neural-network
-nååbs trying to become noobs
+Creates an untrained neural network, according to user preferences.
