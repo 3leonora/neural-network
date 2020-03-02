@@ -1,0 +1,9 @@
+#!/bin/bash
+# Run an experiment
+
+thisdir=$(pwd -P $(dirnam
+
+		   e "$0"))
+exec "$thisdir/runpython" -m experiments "$@"
+
+

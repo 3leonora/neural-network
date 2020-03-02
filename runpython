@@ -1,0 +1,9 @@
+#!/bin/bash
+# Run python3 with pylib/ added to the PYTHONPATH
+#
+
+thisdir=$(pwd -P $(dirname "$0"))
+export PYTHONPATH=$thisdir/pylib
+exec python3 "$@"
+
+
