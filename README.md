@@ -10,7 +10,7 @@ pip3 install matplotlib
 
 UTILITIES
 
-* runex EXPERIMENTNAME args...
+* ./runex EXPERIMENTNAME args...
 * runpython Run python3 with pylib/ in PYTHONPATH
 
 Experiments:
