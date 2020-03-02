@@ -50,7 +50,10 @@ def genimarray(func):
 
 def run_experiment(args):
 
-    # Give seed to random to make subsequent runs equivalent
+    # Give seed to random to make subsequent runs reproducible
+    #
+    # NOTE: This doesn't seem to make the random calls deterministic. Possible
+    # to do that?
     random.seed(123)
     
     print("Classifier1 %s\n" % (args,))

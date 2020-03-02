@@ -57,46 +57,6 @@ class Sigmoid(ActivationFunction):
         return w * (1 - w)
 
 
-class Layer:
-    """
-    Abstract class of a network layer
-    Contains basic class structure and the constructur method
-    """
-
-    _parent = None
-    _child = None
-    # Connecting each layer to the previous and the next layer in the network
-
-    _matrix = []
-    # Contains all mutable layer information (neuron offset, neuron values, and/or weights)
-
-    def __init__(self, parent, size):
-        # Connects new layers to a parent, and creates an empty matrix with a number of rows corresponding to size
-        self._parent = parent
-        self._matrix = []
-        for _ in range(size):
-            self._matrix.append([])
-        if parent:
-            parent.fill_matrix(size)
-            parent.set_child(self)
-
-    def set_child(self, child):
-        self._child = child
-    
-    def get_matrix(self):
-        return self._matrix
-
-    def randomize(self):
-        """
-        Not implemented
-        """
-        raise NotImplementedError
-    
-    def backpropagate(self, matrix, foo):
-        '''
-        '''
-        raise NotImplementedError
-
 class LinearNeuronLayer():
     '''
     A layer of linear sum perceptrons with a parametrizable activation
@@ -116,7 +76,7 @@ class LinearNeuronLayer():
         '''
         Calculate the forward vector value from this layer.
         '''
-        return self.afunc(self.weights.dot(invec) + self.biases)
+        return self.afunc(self.weights.dot(invec) + self.biases) # Linear forward function...
 
     def randomize(self):
         '''
@@ -129,17 +89,6 @@ class LinearNeuronLayer():
         print("biases = %s\nweights = %s" % (self.biases, self.weights))
 
 
-class WeightLayer(Layer):
-    """
-    A layer containing the connection weights between neuron layers
-    """
-
-    def fill_matrix(self, size):
-        # Generates columns according to size, and fills the matrix with weights
-        for row in self._matrix:
-            for _ in range(size):
-                row.append([0])
-                # NOTE Might want to make the starting values customizable
 
 class ANN(object):
     '''
@@ -164,6 +113,7 @@ class ANN(object):
             vecval = layer.forward(vecval)
 
         return vecval
+
 
     def randomize(self):
 
@@ -211,6 +161,10 @@ class ANN(object):
         # gradient contributions.
         
         for x, y in batch:
+            # This is probably the speed bottleneck. Ie that we
+            # handle each training datum individually. Maybe this and
+            # the backprop function could be changed to process
+            # whole matrices of x and y values.
             grad = [ (g[0] + delta_g[0], g[1] + delta_g[1]) for g, delta_g
                      in zip(grad, self.backprop_sumsq(x,y))]
                      

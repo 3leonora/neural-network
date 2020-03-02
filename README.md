@@ -7,6 +7,12 @@ DEPENDENCIES
 pip3 install numpy
 pip3 install matplotlib
 
+TESTING
+
+To run the python tests under test/ one can do
+
+  >> make test
+
 
 UTILITIES
 
@@ -15,4 +21,9 @@ UTILITIES
 
 Experiments:
 
->> ./runex classifier1
+  >> ./runex classifier1
+
+It is also possible to do
+
+  >> make ex.classifier1
+
