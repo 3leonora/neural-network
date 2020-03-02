@@ -15,4 +15,4 @@ UTILITIES
 
 Experiments:
 
->> runex classifier1
+>> ./runex classifier1
